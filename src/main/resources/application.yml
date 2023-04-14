@@ -1,0 +1,32 @@
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+#    org.springframework.boot.autoconfigure: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+
+server:
+  port: 8090
+
+spring:
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: ${client-id}
+            client-secret: ${client-id}
+            clientName: Keycloak
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8090/login/oauth2/code/${client-id}
+            scope:
+              - openid
+        provider:
+          keycloak:
+            issuer-uri : http://localhost:8442/realms/spring-boot-security-task
+
+resource-uri: http://localhost:8080/api
+client-id: spring-boot-security-task-client
